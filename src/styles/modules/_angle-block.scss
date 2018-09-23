@@ -1,0 +1,5 @@
+// PS: look into gulpfile.js for `encodeBase64` function referrence
+@mixin block-bg( $borderColor, $fillColor ) {
+    $encoded: encodeBase64('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 320 480"><defs><path id="a" d="M388 104a12 12 0 0 1 12 12v456a12 12 0 0 1-12 12H92a12 12 0 0 1-12-12V147l43-43z"/><clipPath id="b"><use fill="#fff" xlink:href="#a"/></clipPath></defs><g transform="translate(-80 -104)"><use fill="#{$fillColor}" xlink:href="#a"/><use fill="#fff" fill-opacity="0" stroke="#{$borderColor}" stroke-miterlimit="50" stroke-width="8" clip-path="url(&quot;#b&quot;)" xlink:href="#a"/></g></svg>');
+    background-image: url('data:image/svg+xml;base64,#{$encoded}');
+}

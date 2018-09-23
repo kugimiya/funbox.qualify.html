@@ -1,0 +1,264 @@
+// Backgrounds
+.block {
+    @include block-bg($gray, $white);
+    background-size: cover;
+
+    &--blue-border {
+        @include block-bg($blue, $white);
+    }
+
+    &--red-border {
+        @include block-bg($red, $white);
+    }
+
+    &--disabled {
+        // oh, -ms-filter, magic there
+        // grayscale only, cause i dont find refference for 'brightness' and 'contrast' params
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(grayScale=1)";
+            filter: grayscale(48%) brightness(87%) contrast(49%);
+    }
+
+    &--cat-background {
+        background-image: url('/images/swag_cat.png');
+
+        background-position-y: calc(100% - 2px);
+        background-position-x: 2px;
+        background-repeat: no-repeat;
+
+        @media (max-width: $tabletW) {
+            background-size: 235px;
+        }
+    }
+
+    &__ellipse {
+        border-radius: 100%;
+        background-color: $gray;
+
+        &--blue {
+            background-color: $blue;
+        }
+        
+        &--red {
+            background-color: $red;
+        }
+    }
+}
+
+
+// Sizes, paddings
+.block {
+    position: relative;
+
+    width: 320px;
+    height: 480px;
+
+    @media (max-width: $tabletW) {
+        width: 230px;
+        height: 345px;
+    }
+
+    @media (max-width: $mobileW) {
+        width: 280px;
+        height: 420px;
+
+        margin-bottom: 80px;
+    }
+
+    &__wrapper {
+        width: 100%;
+        height: 100%;
+
+        padding: 25px;
+        padding-left: 49px;
+        padding-top: 21px;
+    }
+
+    &__name {
+        padding-top: 5px;
+    }
+
+    &__list {
+        padding-top: 11px;
+    }   
+
+    &__ellipse {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+
+        width: 81px;
+        height: 79px;
+    }
+
+    &__footer {
+        position: absolute;
+        bottom: -30px;
+        left: -15px;
+        right: -15px;
+
+        @media (max-width: $tabletW) {
+            left: 0;
+            right: 0;
+        }
+
+        &-text {
+            width: 100%;
+        }
+    }
+}
+
+
+// Displays
+.block {
+    display: flex;
+
+    @media (max-width: $tabletW) {
+        &:nth-child(2n) {
+            align-self: flex-end;
+        }
+    }
+
+    @media (max-width: $mobileW) {
+        &:nth-child(2n) {
+            align-self: 0;
+            align-self: none;
+            align-self: auto;
+            align-self: unset;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    &__ellipse {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__footer-text {
+        display: block;
+    }
+}
+
+
+// Typography
+.block {
+    font-family: $trebuchet;
+    font-size: $blockFontSize;
+
+    @media (max-width: $tabletW) {
+        font-size: 32px;
+    }
+
+    @media (max-width: $mobileW) {
+        font-size: 40px;
+    }
+
+    &__title {
+        font-size: (16 / 48) * 1em;
+        font-weight: 400;
+        color: $grayText;
+
+        cursor: pointer;
+    }
+
+    &__name {
+        font-family: $trebuchetBold;
+        font-size: 1em;
+        color: $black;
+
+        &-option {
+            display: block;
+            font-size: .5em;
+        }
+
+        cursor: pointer;
+    }
+
+    &__list {
+        color: $grayText;
+        font-size: (14 / 48) * 1em;
+        font-weight: 400;
+        line-height: (16 / 48) + 1;
+
+        &-elm {
+            display: block;
+        }
+
+        cursor: pointer;
+    }
+
+    &__ellipse {
+        line-height: 1;
+        text-align: center;
+
+        color: white;
+
+        &-num {
+            font-size: (42 / 48) * 1em;
+        }
+
+        &-unit {
+            font-size: (21 / 48) * 1em;
+        }
+
+        cursor: pointer;
+    }
+
+    &__footer-text {
+        color: white;
+        text-align: center;
+
+        font-size: (13 / 48) * 1em;
+
+        &--disabled {
+            color: #FFFF66;
+        }
+    }
+}
+
+// Hovers
+.block:hover {
+    // blues
+    .block__ellipse--blue {
+        background-color: $blueHover;
+    }
+
+    .link {
+        color: $blueHover;
+    }
+
+    &.block--blue-border {
+        @include block-bg($blueHover, $white);
+    }
+
+    // reds
+    .block__ellipse--red {
+        background-color: $redHover;
+    }
+
+    .link--red {
+        color: $redHover;
+    }
+
+    &.block--red-border {
+        @include block-bg($redHover, $white);
+    }
+}
+
+// Magic hovers
+.page .hidden,
+.page .block[data-state=selected]:hover .hover-hidden {
+    display: none;
+}
+
+.page .block[data-state=selected]:hover .hover-visible {
+    display: inherit;
+}
