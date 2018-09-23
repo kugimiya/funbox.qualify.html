@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PageTitle</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body class="page">
+    <div class="page-shadow"></div>
+
+    <div class="page-title">
+        <h1 class="page-title__text">Ты сегодня покормил кота?</h1>
+    </div>
+    
+    <div class="cards">
+
+        <!-- first card -->
+        <div class="block block--blue-border" data-state="normal">
+            <div class="block__wrapper block--cat-background" data-card-body>
+                <div class="block__title">
+                    <span class="block__title-text hover-hidden">Сказочное заморское яство</span>
+                    <a   class="block__title-text hidden hover-visible link link--red">Котэ не одобряет?</a>
+                </div>
+
+                <div class="block__name">
+                    <span class="block__name-text">Нямушка</span>
+                    <span class="block__name-option">с фуа-гра</span>
+                </div>
+
+                <div class="block__list">
+                    <span class="block__list-elm"><b>10</b> порций</span>
+                    <span class="block__list-elm">мышь в подарок</span>
+                </div>
+            </div>
+
+            <div class="block__ellipse block__ellipse--blue">
+                <span class="block__ellipse-num">0,5</span>
+                <span class="block__ellipse-unit">кг</span>
+            </div>
+
+            <div class="block__footer" data-stateful>
+                <span class="block__footer-text" data-state="normal">Чего сидишь? Порадуй котэ, <a   class="link" data-stateful-link>купи.</a></span>
+                <span class="block__footer-text hidden" data-state="selected">Печень утки разварная с артишоками.</span>
+                <span class="block__footer-text block__footer-text--disabled hidden" data-state="disabled">Печалька, с фуа-гра закончился.</span>
+            </div>
+        </div>
+
+        <!-- second card -->
+        <div class="block block--blue-border" data-state="normal">
+            <div class="block__wrapper block--cat-background" data-card-body>
+                <div class="block__title">
+                    <span class="block__title-text hover-hidden">Сказочное заморское яство</span>
+                    <a   class="block__title-text hidden hover-visible link link--red">Котэ не одобряет?</a>
+                </div>
+
+                <div class="block__name">
+                    <span class="block__name-text">Нямушка</span>
+                    <span class="block__name-option">с рыбой</span>
+                </div>
+
+                <div class="block__list">
+                    <span class="block__list-elm"><b>40</b> порций</span>
+                    <span class="block__list-elm"><b>2</b> мыши в подарок</span>
+                </div>
+            </div>
+
+            <div class="block__ellipse block__ellipse--blue">
+                <span class="block__ellipse-num">2</span>
+                <span class="block__ellipse-unit">кг</span>
+            </div>
+
+            <div class="block__footer" data-stateful>
+                <span class="block__footer-text" data-state="normal">Чего сидишь? Порадуй котэ, <a   class="link" data-stateful-link>купи.</a></span>
+                <span class="block__footer-text hidden" data-state="selected">Головы щучьи с чесноком да свежайшая сёмгушка.</span>
+                <span class="block__footer-text block__footer-text--disabled hidden" data-state="disabled">Печалька, с рыбой закончился.</span>
+            </div>
+        </div>
+
+
+        <!-- third card -->
+        <div class="block block--disabled" data-state="disabled">
+            <div class="block__wrapper block--cat-background" data-card-body>
+                <div class="block__title">
+                    <span class="block__title-text hover-hidden">Сказочное заморское яство</span>
+                    <a   class="block__title-text hidden hover-visible link link--red">Котэ не одобряет?</a>
+                </div>
+
+                <div class="block__name">
+                    <span class="block__name-text">Нямушка</span>
+                    <span class="block__name-option">с курой</span>
+                </div>
+
+                <div class="block__list">
+                    <span class="block__list-elm"><b>100</b> порций</span>
+                    <span class="block__list-elm"><b>5</b> мышей в подарок</span>
+                    <span class="block__list-elm">заказчик доволен</span>
+                </div>
+            </div>
+
+            <div class="block__ellipse">
+                <span class="block__ellipse-num">5</span>
+                <span class="block__ellipse-unit">кг</span>
+            </div>
+
+            <div class="block__footer" data-stateful>
+                <span class="block__footer-text hidden" data-state="normal">Чего сидишь? Порадуй котэ, <a   class="link" data-stateful-link>купи.</a></span>
+                <span class="block__footer-text hidden" data-state="selected">Филе из цыплят с трюфелями в бульоне.</span>
+                <span class="block__footer-text block__footer-text--disabled" data-state="disabled">Печалька, с курой закончился.</span>
+            </div>
+        </div>
+
+    </div>
+
+
+<script>
+
+    // Element.matches pollyfill
+    (function() {
+        if (!Element.prototype.matches) {
+            Element.prototype.matches = Element.prototype.matchesSelector ||
+                Element.prototype.webkitMatchesSelector ||
+                Element.prototype.mozMatchesSelector ||
+                Element.prototype.msMatchesSelector;
+        }
+    })();
+
+    delegate('click', '[data-card-body]', toggleCard);
+    delegate('click', '[data-stateful-link]', toggleCardByLink);
+
+    function delegate (eventName, elementSelector, cb) {
+        document.addEventListener(
+            eventName, 
+            function (event) {
+                let a = event.target;
+
+                while (a.parentElement != undefined) {
+                    if (a.matches(elementSelector)) {
+                        cb(a);
+                        a = a.parentElement;
+                    } else {
+                        a = a.parentElement;
+                    }
+                }
+            }
+        );
+    }
+
+    function toggleCardByLink (link) {
+        toggleCard(link.parentElement.parentElement);
+    }
+
+    function toggleCard (cardBody) {
+        var card = cardBody.parentElement,
+            ellipse = card.querySelector('.block__ellipse'),
+            description = card.querySelector('[data-stateful]');
+
+        if (card.dataset.state == 'normal') {
+            card.dataset.state = 'selected';
+            card.classList.toggle('block--blue-border', false);
+            card.classList.toggle('block--red-border', true);
+
+            ellipse.classList.toggle('block__ellipse--blue', false);
+            ellipse.classList.toggle('block__ellipse--red', true);
+
+            
+            for (var key in description.children) {
+                if (description.children.hasOwnProperty(key)) {
+                    var element = description.children[key];
+                    element.classList.add('hidden');
+                }
+            }
+
+            description.querySelector('[data-state="selected"]').classList.remove('hidden');
+        } else if (card.dataset.state == 'selected') {
+            card.dataset.state = 'normal';
+            card.classList.toggle('block--red-border', false);
+            card.classList.toggle('block--blue-border', true);
+
+            ellipse.classList.toggle('block__ellipse--red', false);
+            ellipse.classList.toggle('block__ellipse--blue', true);
+
+            for (var key in description.children) {
+                if (description.children.hasOwnProperty(key)) {
+                    var element = description.children[key];
+                    element.classList.add('hidden');
+                }
+            }
+
+            description.querySelector('[data-state="normal"]').classList.remove('hidden');
+        }
+    }
+
+</script>
+
+</body>
+</html>
